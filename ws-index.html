@@ -1,0 +1,34 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+</head>
+<body>
+  <button id='btnStart'>Start</button>
+
+  <script>
+    function playAudio() {
+      var ws = new WebSocket('ws://localhost:8080');
+      ws.binaryType = 'arraybuffer';
+
+      var ctx = new window.AudioContext();
+      ws.onopen = () => {
+        ws.send('Get the file');
+      }
+      ws.onmessage = (evt) => {
+        var source = ctx.createBufferSource();
+        var data = evt.data;
+        console.log(data);
+        ctx.decodeAudioData(data, (buffer) => {
+          console.log(buffer);
+          source.buffer = buffer;
+          source.connect(ctx.destination);
+          source.start(2, 1, 1);
+        })
+      }
+    }
+
+    var btnStart = document.querySelector('button#btnStart');
+    btnStart.onclick = playAudio;
+
+  </script>
+</body>

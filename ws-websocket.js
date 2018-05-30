@@ -11,7 +11,7 @@ wss.on('connection', (ws) => {
     console.log(ws._socket.remoteAddress);
     console.log(ws._socket.remotePort);
     ws.on('message', (message) => {
-      var data = fs.readFileSync('./guitarup_full.wav');
+      var data = fs.readFileSync('./test_music/guitarup_full.wav');
       ws.send(data);
       console.log('The sent data:', data);
     })

@@ -1,5 +1,5 @@
 var fs = require('fs');
-var data = fs.readFileSync('./guitarup_full.wav');
+var data = fs.readFileSync('./test_music/guitarup_full.wav');
 
 function hex2ascii (hexBuffer, bytesLength) {
   // Buffer (4 bytes) to Hex String
